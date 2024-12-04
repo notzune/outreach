@@ -85,7 +85,8 @@ public class Employee extends Person implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString() + ", Salary: " + salary + ", Department: " + department +
-                ", Position: " + position + ", Years of Service: " + yearsOfService;
+        return String.format(
+                "Employee{id='%s', name='%s', salary=%.2f, department='%s', position='%s', yearsOfService=%d}",
+                getId(), getName(), salary, department, position, yearsOfService);
     }
 }
