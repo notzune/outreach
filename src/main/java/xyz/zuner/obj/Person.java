@@ -5,7 +5,7 @@ package xyz.zuner.obj;
  * <p>Data Structures Final Project</p>
  * <p>Rutgers ID: 199009651</p>
  * <br>
- *
+ * <p>
  * Abstract class representing a generic person.
  *
  * @author Zeyad "zmr15" Rashed

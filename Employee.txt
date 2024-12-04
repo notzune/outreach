@@ -1,0 +1,66 @@
+047589
+Alice Williams
+80084.22
+Operations
+Clerk
+2
+804155
+Eve Brown
+74678.88
+Accounting
+Analyst
+16
+479400
+Diana Jones
+71137.12
+IT
+Analyst
+17
+214772
+Frank Jones
+94968.12
+IT
+Clerk
+6
+589172
+Eve Garcia
+76325.34
+HR
+Clerk
+1
+219181
+Bob Johnson
+98665.72
+HR
+Clerk
+17
+162662
+Eve Williams
+58784.61
+Accounting
+Analyst
+6
+749397
+Charlie Brown
+65467.88
+IT
+Supervisor
+4
+829362
+Alice Garcia
+64403.09
+Accounting
+Manager
+18
+354722
+Diana Williams
+57704.56
+Marketing
+Clerk
+16
+333333
+Mai Rashed
+1.000000001E8
+IT
+Supervisor
+110

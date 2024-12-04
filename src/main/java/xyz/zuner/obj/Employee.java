@@ -7,7 +7,7 @@ import java.io.Serializable;
  * <p>Data Structures Final Project</p>
  * <p>Rutgers ID: 199009651</p>
  * <br>
- *
+ * <p>
  * Represents an Employee, extending the Person class.
  *
  * @author Zeyad "zmr15" Rashed
@@ -15,6 +15,7 @@ import java.io.Serializable;
  * @created 30 Nov 2024
  */
 public class Employee extends Person implements Serializable {
+
     private double salary;
     private String department;
     private String position;
@@ -38,18 +39,49 @@ public class Employee extends Person implements Serializable {
         this.yearsOfService = yearsOfService;
     }
 
+    /**
+     * Overloaded constructor for Employee without position and department.
+     */
+    public Employee(String id, String name, double salary, int yearsOfService) {
+        super(id, name);
+        this.salary = salary;
+        this.department = "Unknown";
+        this.position = "Unknown";
+        this.yearsOfService = yearsOfService;
+    }
+
     // getters and setters
-    public double getSalary() { return salary; }
-    public void setSalary(double salary) { this.salary = salary; }
+    public double getSalary() {
+        return salary;
+    }
 
-    public String getDepartment() { return department; }
-    public void setDepartment(String department) { this.department = department; }
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
 
-    public String getPosition() { return position; }
-    public void setPosition(String position) { this.position = position; }
+    public String getDepartment() {
+        return department;
+    }
 
-    public int getYearsOfService() { return yearsOfService; }
-    public void setYearsOfService(int yearsOfService) { this.yearsOfService = yearsOfService; }
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public int getYearsOfService() {
+        return yearsOfService;
+    }
+
+    public void setYearsOfService(int yearsOfService) {
+        this.yearsOfService = yearsOfService;
+    }
 
     @Override
     public String toString() {
