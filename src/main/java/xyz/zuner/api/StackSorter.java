@@ -16,7 +16,7 @@ import java.util.List;
  * Selection Sort, and Heap Sort. Implements the {@link Sortable} interface for general sorting functionality.
  * </p>
  *
- * @author
+ * @author Zeyad "zmr15" Rashed
  * @mailto zmr15@scarletmail.rutgers.edu
  * @created 01 Dec 2024
  */
