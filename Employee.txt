@@ -1,66 +1,180 @@
-047589
-Alice Williams
-80084.22
+046992
+Alice Garcia
+66401.16
+IT
+Analyst
+4
+292477
+Alice Johnson
+97076.51
+HR
+Clerk
+12
+131071
+Alice Jones
+89278.2
 Operations
-Clerk
-2
-804155
-Eve Brown
-74678.88
-Accounting
-Analyst
-16
-479400
-Diana Jones
-71137.12
-IT
-Analyst
-17
-214772
-Frank Jones
-94968.12
-IT
-Clerk
-6
-589172
-Eve Garcia
-76325.34
-HR
-Clerk
-1
-219181
-Bob Johnson
-98665.72
-HR
-Clerk
-17
-162662
-Eve Williams
-58784.61
-Accounting
 Analyst
 6
-749397
-Charlie Brown
-65467.88
+990026
+Alice Smith
+50226.09
+Marketing
+Technician
+7
+141541
+Alice Williams
+51305.05
 IT
 Supervisor
 4
-829362
-Alice Garcia
-64403.09
+778659
+Alice Williams
+51860.41
+Marketing
+Supervisor
+6
+461872
+Bob Johnson
+88976.87
+HR
+Supervisor
+2
+853104
+Bob Smith
+93389.57
+HR
+Manager
+5
+101021
+Bob Williams
+60513.72
+IT
+Analyst
+8
+994571
+Bob Williams
+70485.91
+Accounting
+Analyst
+18
+727935
+Charlie Brown
+63189.25
+Accounting
+Technician
+13
+850961
+Charlie Brown
+85829.97
+Accounting
+Supervisor
+4
+632747
+Charlie Garcia
+89826.74
+Marketing
+Supervisor
+17
+866634
+Charlie Jones
+60874.09
+IT
+Analyst
+8
+730547
+Diana Brown
+54517.35
+IT
+Technician
+5
+228309
+Diana Johnson
+94482.88
+Marketing
+Manager
+7
+725527
+Diana Smith
+78631.41
+HR
+Analyst
+18
+669069
+Eve Brown
+93362.12
+IT
+Analyst
+1
+272277
+Eve Johnson
+50318.5
+IT
+Clerk
+12
+283171
+Eve Johnson
+69338.08
+HR
+Manager
+19
+064688
+Eve Smith
+63065.82
+Accounting
+Clerk
+1
+163385
+Eve Williams
+69965.62
+HR
+Technician
+16
+070014
+Frank Brown
+87175.16
+IT
+Analyst
+5
+183310
+Frank Garcia
+96785.4
+Accounting
+Clerk
+7
+009669
+Frank Johnson
+90332.2
+Accounting
+Supervisor
+10
+273566
+Frank Johnson
+64597.17
+Accounting
+Technician
+8
+547210
+Frank Johnson
+50621.85
 Accounting
 Manager
-18
-354722
-Diana Williams
-57704.56
-Marketing
+12
+528618
+Frank Jones
+86092.62
+HR
 Clerk
-16
-333333
-Mai Rashed
-1.000000001E8
+18
+484841
+Frank Williams
+71122.82
 IT
 Supervisor
-110
+11
+781723
+Frank Williams
+69610.14
+Operations
+Technician
+11
