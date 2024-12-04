@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import xyz.zuner.api.StackSorter;
@@ -13,7 +14,6 @@ import xyz.zuner.obj.Employee;
 import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * <p>21:198:335:02 Data Structures & Algorithms</p>
@@ -39,32 +39,36 @@ public class EmployeeManagerApp extends Application {
 
     private final StackSorter sorter = new StackSorter();
     private List<Employee> employees = new ArrayList<>();
-    private TextArea displayArea;
-    private final Map<Button, Boolean> toggleStates = new HashMap<>(); // tracks toggle states between ascend./descend.
-    private boolean useHeapSort = true; // tracks sorting algorithm
+    private TableView<Employee> employeeTable;
+    private final Map<Button, Boolean> toggleStates = new HashMap<>();
+    private boolean useHeapSort = true;
 
     public static void main(String[] args) {
         launch(args);
     }
 
+    /**
+     * Starts the JavaFX application.
+     *
+     * @param primaryStage the primary stage for the application.
+     */
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Employee Manager");
 
-        // init display area
-        displayArea = new TextArea();
-        displayArea.setEditable(false);
-        displayArea.setPrefHeight(200);
+        // initialize table
+        employeeTable = new TableView<>();
+        initializeTable();
 
-        // load employees from file
+        // load data
         loadEmployees();
 
-        // create sorting buttons:
+        // create sort buttons
         Button sortByName = createToggleSortButton("Sort by Name", Employee::getName);
         Button sortById = createToggleSortButton("Sort by ID", Employee::getId);
         Button sortBySalary = createToggleSortButton("Sort by Salary", Employee::getSalary);
 
-        // other buttons:
+        // create other buttons
         Button populateRandom = new Button("Populate Random Employees");
         populateRandom.setOnAction(e -> populateRandomEmployees());
 
@@ -77,7 +81,6 @@ public class EmployeeManagerApp extends Application {
         Button addManual = new Button("Add Employee Manually");
         addManual.setOnAction(e -> modifyEmployeeFile());
 
-        // Sorting algorithm toggle button
         Button toggleAlgorithm = new Button("Switch to Bubble Sort");
         toggleAlgorithm.setOnAction(e -> {
             useHeapSort = !useHeapSort;
@@ -86,11 +89,10 @@ public class EmployeeManagerApp extends Application {
                     Alert.AlertType.INFORMATION);
         });
 
-        // sorting button with performance readout
         Button sortButton = new Button("Sort and Measure Time");
         sortButton.setOnAction(e -> sortAndMeasurePerformance());
 
-        // layout
+        // set layout
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(15));
         layout.getChildren().addAll(
@@ -98,13 +100,39 @@ public class EmployeeManagerApp extends Application {
                 toggleAlgorithm, sortButton, sortByName, sortById, sortBySalary,
                 new Label("File Operations:"),
                 populateRandom, saveToFile, saveSortedToFile, addManual,
-                new Label("Display Area:"),
-                displayArea
+                new Label("Employee Table:"),
+                employeeTable
         );
 
-        Scene scene = new Scene(layout, 500, 700);
+        Scene scene = new Scene(layout, 800, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    /**
+     * Initializes the TableView with columns for employee attributes.
+     */
+    private void initializeTable() {
+        TableColumn<Employee, String> idColumn = new TableColumn<>("ID");
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+
+        TableColumn<Employee, String> nameColumn = new TableColumn<>("Name");
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        TableColumn<Employee, Double> salaryColumn = new TableColumn<>("Salary");
+        salaryColumn.setCellValueFactory(new PropertyValueFactory<>("salary"));
+
+        TableColumn<Employee, String> departmentColumn = new TableColumn<>("Department");
+        departmentColumn.setCellValueFactory(new PropertyValueFactory<>("department"));
+
+        TableColumn<Employee, String> positionColumn = new TableColumn<>("Position");
+        positionColumn.setCellValueFactory(new PropertyValueFactory<>("position"));
+
+        TableColumn<Employee, Integer> yearsColumn = new TableColumn<>("Years of Service");
+        yearsColumn.setCellValueFactory(new PropertyValueFactory<>("yearsOfService"));
+
+        employeeTable.getColumns().addAll(idColumn, nameColumn, salaryColumn, departmentColumn, positionColumn, yearsColumn);
+        employeeTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     /**
@@ -117,25 +145,22 @@ public class EmployeeManagerApp extends Application {
      */
     private Button createToggleSortButton(String label, Function<Employee, ? extends Comparable> keyExtractor) {
         Button button = new Button(label);
-        toggleStates.put(button, true); // initially ascending order
+        toggleStates.put(button, true);
 
         button.setOnAction(e -> {
             boolean isAscending = toggleStates.get(button);
             Comparator<Employee> comparator = Comparator.comparing(keyExtractor, Comparator.nullsLast(Comparator.naturalOrder()));
 
-            if (!isAscending) {
-                comparator = comparator.reversed();
-            }
+            if (!isAscending) comparator = comparator.reversed();
 
             long startTime = System.nanoTime();
             sorter.sort(employees, comparator);
             long endTime = System.nanoTime();
 
-            displayArea.setText(formatEmployeeList());
+            updateTable();
             showAlert("Performance", label + " completed in " + (endTime - startTime) + " nanoseconds.",
                     Alert.AlertType.INFORMATION);
 
-            // Toggle state
             toggleStates.put(button, !isAscending);
         });
 
@@ -159,36 +184,31 @@ public class EmployeeManagerApp extends Application {
         }
 
         long endTime = System.nanoTime();
-        long duration = endTime - startTime;
-        displayArea.setText(formatEmployeeList());
-        showAlert("Performance", "Sorting completed in " + duration + " nanoseconds.",
+        updateTable();
+        showAlert("Performance", "Sorting completed in " + (endTime - startTime) + " nanoseconds.",
                 Alert.AlertType.INFORMATION);
     }
 
     /**
-     * Loads employees from a file and displays them in the display area.
+     * Updates the employee table with the current list of employees.
+     */
+    private void updateTable() {
+        employeeTable.getItems().setAll(employees);
+    }
+
+    /**
+     * Loads employees from a file and displays them in the table.
      *
      * @see EmployeeFileHandler#loadEmployeesFromFile(String)
      */
     private void loadEmployees() {
         try {
             employees = new ArrayList<>(EmployeeFileHandler.loadEmployeesFromFile("Employee.txt"));
-            displayArea.setText(formatEmployeeList());
+            updateTable();
         } catch (IOException e) {
             showAlert("Error", "Failed to load employees: " + e.getMessage(), Alert.AlertType.ERROR);
             employees = new ArrayList<>();
         }
-    }
-
-    /**
-     * Formats the list of employees into a string for display.
-     *
-     * @return the formatted employee list as a string
-     */
-    private String formatEmployeeList() {
-        return employees.stream()
-                .map(Employee::toString)
-                .collect(Collectors.joining("\n"));
     }
 
     /**
@@ -199,7 +219,7 @@ public class EmployeeManagerApp extends Application {
     private void populateRandomEmployees() {
         try {
             EmployeeFileHandler.populateFileWithRandomEmployees(30);
-            loadEmployees(); // Reload the updated file
+            loadEmployees();
             showAlert("Success", "Random employees added successfully.", Alert.AlertType.INFORMATION);
         } catch (IOException e) {
             showAlert("Error", "Failed to populate employees: " + e.getMessage(), Alert.AlertType.ERROR);
@@ -289,7 +309,7 @@ public class EmployeeManagerApp extends Application {
                     int yearsOfService = Integer.parseInt(yearsOfServiceField.getText());
 
                     EmployeeFileHandler.addEmployeeManually(id, name, salary, department, position, yearsOfService);
-                    loadEmployees(); // Reload the updated file
+                    loadEmployees();
                     showAlert("Success", "Employee added successfully.", Alert.AlertType.INFORMATION);
                 } catch (Exception e) {
                     showAlert("Error", "Invalid input. Please ensure all fields are filled correctly.", Alert.AlertType.ERROR);
