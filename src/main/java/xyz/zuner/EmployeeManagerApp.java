@@ -14,7 +14,6 @@ import xyz.zuner.obj.Employee;
 import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * <p>21:198:335:02 Data Structures & Algorithms</p>
@@ -23,7 +22,7 @@ import java.util.stream.Collectors;
  * <br>
  * <p>
  * JavaFX application for employee management with sorting and file handling features.
- *
+ * <p>
  * Requirements Met:
  * - Sorting algorithms (Bubble Sort, Heap Sort).
  * - Polymorphism (via {@link xyz.zuner.api.Sortable} interface).
@@ -39,9 +38,9 @@ import java.util.stream.Collectors;
 public class EmployeeManagerApp extends Application {
 
     private final StackSorter sorter = new StackSorter();
+    private final Map<Button, Boolean> toggleStates = new HashMap<>(); // toggle states for sort buttons
     private List<Employee> employees = new ArrayList<>();
     private TableView<Employee> employeeTable;
-    private final Map<Button, Boolean> toggleStates = new HashMap<>(); // toggle states for sort buttons
     private boolean useHeapSort = true; // tracks sorting algorithm
 
     public static void main(String[] args) {
@@ -215,7 +214,7 @@ public class EmployeeManagerApp extends Application {
     private void populateRandomEmployees() {
         try {
             EmployeeFileHandler.populateFileWithRandomEmployees(30);
-            loadEmployees(); // Reload the updated file
+            loadEmployees(); // reload the updated file
             showAlert("Success", "Random employees added successfully.", Alert.AlertType.INFORMATION);
         } catch (IOException e) {
             showAlert("Error", "Failed to populate employees: " + e.getMessage(), Alert.AlertType.ERROR);
@@ -305,7 +304,7 @@ public class EmployeeManagerApp extends Application {
                     int yearsOfService = Integer.parseInt(yearsOfServiceField.getText());
 
                     EmployeeFileHandler.addEmployeeManually(id, name, salary, department, position, yearsOfService);
-                    loadEmployees(); // Reload the updated file
+                    loadEmployees(); // reload the updated file
                     showAlert("Success", "Employee added successfully.", Alert.AlertType.INFORMATION);
                 } catch (Exception e) {
                     showAlert("Error", "Invalid input. Please ensure all fields are filled correctly.", Alert.AlertType.ERROR);

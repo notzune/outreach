@@ -24,11 +24,11 @@ public class StackSorter implements Sortable<Employee> {
 
     /**
      * Performs Bubble Sort on a list of employees.
-     *
+     * <p>
      * Time Complexity: O(n^2) - due to nested loops.
      * Space Complexity: O(1) - in-place sorting.
      *
-     * @param items the list of employees to sort
+     * @param items      the list of employees to sort
      * @param comparator the comparator defining the sort order
      */
     public static void bubbleSort(List<Employee> items, Comparator<Employee> comparator) {
@@ -46,11 +46,11 @@ public class StackSorter implements Sortable<Employee> {
 
     /**
      * Performs Selection Sort on a list of employees.
-     *
+     * <p>
      * Time Complexity: O(n^2) - nested loops for finding the minimum element.
      * Space Complexity: O(1) - in-place sorting.
      *
-     * @param items the list of employees to sort
+     * @param items      the list of employees to sort
      * @param comparator the comparator defining the sort order
      */
     public static void selectionSort(List<Employee> items, Comparator<Employee> comparator) {
@@ -70,11 +70,11 @@ public class StackSorter implements Sortable<Employee> {
 
     /**
      * Performs Heap Sort on a list of employees.
-     *
+     * <p>
      * Time Complexity: O(n log n) - due to heap construction and repeated heapify calls.
      * Space Complexity: O(1) - in-place sorting.
      *
-     * @param items the list of employees to sort
+     * @param items      the list of employees to sort
      * @param comparator the comparator defining the sort order
      */
     public static void heapSort(List<Employee> items, Comparator<Employee> comparator) {
@@ -97,12 +97,12 @@ public class StackSorter implements Sortable<Employee> {
 
     /**
      * Heapifies a subtree rooted at the given index.
-     *
+     * <p>
      * Time Complexity: O(log n) - due to traversal along the height of the heap.
      *
-     * @param items the list of employees
-     * @param n the size of the heap
-     * @param i the root index
+     * @param items      the list of employees
+     * @param n          the size of the heap
+     * @param i          the root index
      * @param comparator the comparator defining the sort order
      */
     private static void heapify(List<Employee> items, int n, int i, Comparator<Employee> comparator) {
@@ -128,11 +128,11 @@ public class StackSorter implements Sortable<Employee> {
     /**
      * Sorts a list of employees using the provided comparator.
      * Delegates to Java's built-in sort for optimal performance.
-     *
+     * <p>
      * Time Complexity: O(n log n) - due to TimSort.
      * Space Complexity: O(n) - additional memory usage for TimSort.
      *
-     * @param items the list of employees to sort
+     * @param items      the list of employees to sort
      * @param comparator the comparator defining the sort order
      */
     @Override
@@ -142,14 +142,14 @@ public class StackSorter implements Sortable<Employee> {
 
     /**
      * Performs a binary search for a specific employee in a sorted list.
-     *
+     * <p>
      * Time Complexity: O(log n) - due to repeated halving of the search range.
      * Space Complexity: O(log n) - due to recursion stack.
      *
      * @param items the list of employees to search
-     * @param key the employee to search for
-     * @param low the starting index of the search range
-     * @param high the ending index of the search range
+     * @param key   the employee to search for
+     * @param low   the starting index of the search range
+     * @param high  the ending index of the search range
      * @return the index of the employee if found, or -1 if not found
      */
     @Override
